@@ -4,25 +4,14 @@
   "outputDirectory": "dist",
   "builds": [
     {
-      "src": "server.ts",
+      "src": "api/handler.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "server.ts"
-    },
-    {
-      "src": "/auth/(.*)",
-      "dest": "server.ts"
-    },
-    {
       "src": "/(.*)",
-      "dest": "server.ts"
+      "dest": "api/handler.ts"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
