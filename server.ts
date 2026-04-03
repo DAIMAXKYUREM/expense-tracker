@@ -182,32 +182,4 @@ app.get('/api/categories', async (req, res) => {
   }
 });
 
-// --- STATIC FILES & VITE ---
-
-if (process.env.NODE_ENV === 'production') {
-  const distPath = path.join(process.cwd(), 'dist');
-  app.use(express.static(distPath));
-
-  app.get('*', (req, res) => {
-    // Only serve index.html for non-API requests
-    if (!req.path.startsWith('/api/')) {
-      res.sendFile(path.join(distPath, 'index.html'));
-    } else {
-      res.status(404).json({ error: 'API endpoint not found' });
-    }
-  });
-} else {
-  (async () => {
-    try {
-      const vite = await createViteServer({
-        server: { middlewareMode: true },
-        appType: 'spa',
-      });
-      app.use(vite.middlewares);
-    } catch (e) {
-      console.error('Vite init failed:', e);
-    }
-  })();
-}
-
 export default app;
