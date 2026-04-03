@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import admin from 'firebase-admin';
 // Removed .ts extension for Vercel resolution
-import pool, { initDb } from './db';
+import pool, { initDb } from './db.js';
 
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET || 'iiit-bbsr-secret-key';
